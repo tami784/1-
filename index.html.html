@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タナカホーム｜住まいの定期点検チェックシート（1年目）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   Safari 誘導オーバーレイ
+   ▸ アプリ内ブラウザ（Notion/Chatwork/LINE 等）検知時に表示
+   ▸ 印刷（PDF保存）時は display:none で完全非表示
+   ═══════════════════════════════════════════════════ */
+#safariGuard {
+  display: none;               /* JS が .visible を付与するまで隠す */
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(8, 18, 36, 0.94);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  padding: 20px 16px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+#safariGuard.visible { display: flex; }
+
+.sg-card {
+  background: #ffffff;
+  border-radius: 18px;
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.55);
+  animation: sgSlideUp .3s cubic-bezier(.22,.68,0,1.2) both;
+}
+@keyframes sgSlideUp {
+  from { opacity: 0; transform: translateY(32px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ヘッダー帯 */
+.sg-header {
+  background: linear-gradient(135deg, #c0392b 0%, #96281b 100%);
+  padding: 22px 24px 18px;
+  text-align: center;
+}
+.sg-icon { font-size: 52px; line-height: 1; margin-bottom: 10px; display: block; }
+.sg-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: .04em;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 本文 */
+.sg-body { padding: 20px 22px 22px; }
+
+.sg-problem {
+  font-size: 13.5px;
+  color: #333;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  padding: 13px 16px;
+  background: #fff5f5;
+  border-left: 4px solid #c0392b;
+  border-radius: 0 8px 8px 0;
+}
+.sg-problem strong { color: #c0392b; }
+
+/* ステップリスト */
+.sg-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
+.sg-step  { display: flex; align-items: flex-start; gap: 14px; }
+.sg-step-num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #1a2e4a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sg-step-text {
+  font-size: 14px;
+  color: #2a2319;
+  line-height: 1.7;
+  padding-top: 5px;
+}
+.sg-step-text strong { color: #1a2e4a; }
+.sg-app-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.sg-app-tag {
+  background: #edf2f7;
+  color: #2c4a6e;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: .03em;
+}
+
+/* 区切り線 */
+.sg-divider {
+  border: none;
+  border-top: 1px solid #ede9e1;
+  margin: 0 0 18px;
+}
+
+/* 却下ボタン */
+.sg-dismiss {
+  display: block;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid #d8d3c8;
+  background: #ffffff;
+  font-size: 13px;
+  color: #6b6456;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .15s, color .15s, background .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.sg-dismiss:active {
+  background: #f0ede6;
+  border-color: #1a2e4a;
+  color: #1a2e4a;
+}
+.sg-note {
+  text-align: center;
+  font-size: 11px;
+  color: #b0a898;
+  margin-top: 10px;
+  letter-spacing: .04em;
+}
+
+/* ── 印刷・PDF保存時：完全非表示（最優先） ── */
+@media print {
+  #safariGuard { display: none !important; }
+}
+
+/* ─── 変数 ─────────────────────────────────────── */
+:root {
+  --navy:       #1a2e4a;
+  --navy-mid:   #2c4a6e;
+  --navy-light: #e8eef5;
+  --gold:       #b8963e;
+  --gold-light: #d4af68;
+  --cream:      #faf8f3;
+  --white:      #ffffff;
+  --gray-light: #f0ede6;
+  --gray-mid:   #d8d3c8;
+  --gray-text:  #6b6456;
+  --dark-text:  #2a2319;
+  --red:        #c0392b;
+  --red-light:  #fdf2f1;
+  --tap-h:      48px; /* 最小タップ高さ */
+}
+
+/* ─── リセット ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+input, textarea, button, select { font-family: inherit; }
+button { cursor: pointer; border: none; background: none; }
+
+/* ─── ベース ────────────────────────────────────── */
+body {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  background: var(--cream);
+  color: var(--dark-text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  max-width: 960px;
+  margin: 16px auto 40px;
+  background: var(--white);
+  box-shadow: 0 4px 40px rgba(26,46,74,.14);
+  border-top: 6px solid var(--navy);
+}
+
+/* ─── ヘッダー ──────────────────────────────────── */
+.header {
+  background: var(--navy);
+  padding: 28px 36px 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.company-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 11px;
+  color: var(--gold-light);
+  letter-spacing: .2em;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.doc-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px;
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: .05em;
+  line-height: 1.25;
+}
+.doc-subtitle {
+  font-size: 11px;
+  color: var(--gold-light);
+  margin-top: 6px;
+  letter-spacing: .15em;
+}
+.year-badge {
+  background: var(--gold);
+  color: var(--white);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 26px;
+  font-weight: 700;
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.year-badge span { font-size: 11px; font-weight: 400; margin-top: 3px; letter-spacing: .1em; }
+
+/* ─── 基本情報エリア ─────────────────────────────── */
+.info-area {
+  background: var(--gray-light);
+  padding: 18px 36px;
+  border-bottom: 1px solid var(--gray-mid);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 40px;
+}
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--gray-mid);
+}
+.info-row:last-child { border-bottom: none; }
+.info-row.span2 { grid-column: 1 / -1; }
+.info-label {
+  font-size: 11px;
+  color: var(--gray-text);
+  font-weight: 700;
+  letter-spacing: .1em;
+  min-width: 64px;
+  flex-shrink: 0;
+}
+/* 基本情報入力欄 */
+.info-input {
+  flex: 1;
+  height: var(--tap-h);
+  border: none;
+  border-bottom: 2px solid var(--gray-mid);
+  background: transparent;
+  font-size: 14px;
+  color: var(--dark-text);
+  padding: 0 6px;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color .2s;
+}
+.info-input:focus {
+  border-color: var(--gold);
+  background: #fffdf6;
+}
+
+/* ─── セクション ─────────────────────────────────── */
+.body { padding: 0 28px 32px; }
+
+.section { margin-top: 24px; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--navy);
+  border-radius: 4px 4px 0 0;
+}
+.section-num {
+  background: var(--gold);
+  color: var(--white);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  font-weight: 700;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: .08em;
+}
+.section-icon { margin-left: auto; font-size: 18px; opacity: .7; }
+
+.section-body {
+  border: 1px solid var(--gray-mid);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+}
+
+/* ─── テーブル共通 ───────────────────────────────── */
+.check-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.check-table thead tr { background: var(--navy-light); }
+.check-table th {
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy-mid);
+  text-align: left;
+  letter-spacing: .08em;
+  border-bottom: 1px solid var(--gray-mid);
+}
+.check-table th.center { text-align: center; }
+.check-table td {
+  padding: 10px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #ede9e1;
+  vertical-align: middle;
+}
+.check-table tr:last-child td { border-bottom: none; }
+.check-table td.status { text-align: center; min-width: 116px; }
+.check-table td.remarks { min-width: 150px; }
+
+/* ─── 有/無 トグルボタン ─────────────────────────── */
+.toggle-group {
+  display: inline-flex;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--gray-mid);
+  gap: 0;
+}
+.toggle-btn {
+  min-width: 50px;
+  height: 44px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  background: var(--white);
+  color: #aaa;
+  transition: background .15s, color .15s;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+}
+.toggle-btn:first-child { border-right: 1px solid var(--gray-mid); }
+
+/* 有 → 選択時：赤 */
+.toggle-btn.btn-yes.active {
+  background: var(--red);
+  color: var(--white);
+}
+/* 無 → 選択時：ネイビー */
+.toggle-btn.btn-no.active {
+  background: var(--navy);
+  color: var(--white);
+}
+/* 非選択でも相手が選択済みならやや見やすく */
+.toggle-group:has(.active) .toggle-btn:not(.active) {
+  color: #bbb;
+}
+
+/* ─── チップ（チェックボックス型） ────────────────── */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  padding: 4px 0;
+}
+.chip {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #f0ede6;
+  color: var(--gray-text);
+  border: 2px solid transparent;
+  transition: background .15s, color .15s, border-color .15s;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip::before {
+  content: '□';
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.chip.active {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy-mid);
+}
+.chip.active::before { content: '✓'; }
+
+/* ─── テキスト入力欄（共通） ────────────────────── */
+.text-field {
+  width: 100%;
+  min-height: 44px;
+  border: none;
+  border-bottom: 2px solid var(--gray-mid);
+  background: transparent;
+  font-size: 14px;
+  color: var(--dark-text);
+  padding: 6px 4px;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color .2s, background .2s;
+  resize: none;
+}
+.text-field:focus {
+  border-color: var(--gold);
+  background: #fffdf6;
+}
+
+/* ─── メモ（テキストエリア） ─────────────────────── */
+.memo-section {
+  margin-top: 20px;
+  border: 1px solid var(--gray-mid);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.memo-header {
+  background: var(--navy-mid);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.memo-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: .08em;
+}
+/* memo内の有/無 トグル（白基調） */
+.memo-toggle-group {
+  display: inline-flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,.4);
+}
+.memo-toggle-btn {
+  min-width: 44px;
+  height: 36px;
+  font-size: 13px;
+  font-weight: 700;
+  background: transparent;
+  color: rgba(255,255,255,.6);
+  border: none;
+  transition: background .15s, color .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.memo-toggle-btn:first-child { border-right: 1px solid rgba(255,255,255,.3); }
+.memo-toggle-btn.active {
+  background: rgba(255,255,255,.25);
+  color: var(--white);
+}
+.memo-note {
+  font-size: 11px;
+  color: var(--gray-text);
+  margin-bottom: 8px;
+}
+.memo-body { padding: 14px 16px; background: #fdf9f3; }
+.memo-textarea {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  border: none;
+  border-bottom: 1px solid var(--gray-mid);
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--dark-text);
+  padding: 6px 4px;
+  outline: none;
+  resize: none;
+  -webkit-appearance: none;
+  transition: border-color .2s, background .2s;
+  overflow: hidden;
+}
+.memo-textarea:focus {
+  border-color: var(--gold);
+  background: #fffdf6;
+}
+.memo-textarea + .memo-textarea { margin-top: 4px; }
+
+/* ─── 部位ラベルセル ─────────────────────────────── */
+.part-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy-mid);
+  vertical-align: middle;
+}
+
+/* ─── 連絡先エリア ───────────────────────────────── */
+.contact-section {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.contact-box {
+  border: 1px solid var(--gray-mid);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.contact-box-header {
+  background: var(--navy-light);
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy-mid);
+  letter-spacing: .08em;
+}
+.contact-box-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.contact-row { display: flex; align-items: center; gap: 10px; }
+.contact-type-group {
+  display: inline-flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid var(--gray-mid);
+  flex-shrink: 0;
+}
+.contact-toggle-btn {
+  min-width: 44px;
+  height: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--white);
+  color: #aaa;
+  border: none;
+  transition: background .15s, color .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.contact-toggle-btn:first-child { border-right: 1px solid var(--gray-mid); }
+.contact-toggle-btn.active { background: var(--navy); color: var(--white); }
+
+.contact-label { font-size: 12px; color: var(--gray-text); flex-shrink: 0; }
+.contact-input {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-bottom: 2px solid var(--gray-mid);
+  background: transparent;
+  font-size: 14px;
+  color: var(--dark-text);
+  padding: 0 6px;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color .2s;
+  min-width: 0;
+}
+.contact-input:focus { border-color: var(--gold); background: #fffdf6; }
+
+/* 後日対応ボックス */
+.followup-box {
+  border: 1px solid #e8c8c0;
+  border-radius: 4px;
+  overflow: hidden;
+  grid-column: 1 / -1;
+}
+.followup-header {
+  background: #fdf0ee;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: .08em;
+}
+.followup-body {
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+/* followup chip：やや大きめ */
+.followup-chip {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 22px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #f0ede6;
+  color: var(--gray-text);
+  border: 2px solid transparent;
+  transition: background .15s, color .15s;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.followup-chip::before { content: '□'; font-size: 15px; }
+.followup-chip.active { background: var(--red); color: var(--white); border-color: #a93226; }
+.followup-chip.active::before { content: '✓'; }
+.followup-chip.safe.active { background: var(--navy); border-color: var(--navy-mid); }
+
+/* ─── 署名エリア ─────────────────────────────────── */
+.sign-section {
+  margin-top: 24px;
+  border: 2px solid var(--navy);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.sign-section-header {
+  background: var(--navy);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sign-section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.sign-body {
+  padding: 18px 20px;
+  background: #f7f9fc;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.sign-declaration {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.sign-fields { display: flex; flex-direction: column; gap: 12px; }
+.sign-field-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sign-field-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-text);
+  letter-spacing: .08em;
+  min-width: 50px;
+  flex-shrink: 0;
+}
+.sign-field-input {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-bottom: 2px solid var(--gray-mid);
+  background: transparent;
+  font-size: 14px;
+  color: var(--dark-text);
+  padding: 0 6px;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color .2s;
+}
+.sign-field-input:focus { border-color: var(--gold); }
+
+/* 手書き署名エリア */
+.canvas-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.canvas-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-text);
+  letter-spacing: .08em;
+}
+.canvas-wrapper {
+  position: relative;
+  border: 2px solid var(--navy-mid);
+  border-radius: 6px;
+  background: var(--white);
+  overflow: hidden;
+}
+#signCanvas {
+  display: block;
+  width: 100%;
+  height: 110px;
+  cursor: crosshair;
+  touch-action: none; /* iOS タッチのスクロール抑止 */
+}
+.canvas-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 13px;
+  pointer-events: none;
+  letter-spacing: .05em;
+  user-select: none;
+}
+.canvas-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-clear {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  background: transparent;
+  color: var(--gray-text);
+  border: 1.5px solid var(--gray-mid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color .15s, color .15s, background .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-clear:hover, .btn-clear:active {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--red-light);
+}
+.btn-clear svg { width: 14px; height: 14px; }
+
+/* ─── フッター ───────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 14px;
+  font-size: 10px;
+  color: var(--gray-text);
+  border-top: 1px solid var(--gray-mid);
+  margin-top: 24px;
+  letter-spacing: .1em;
+}
+
+/* ─── 印刷 / PDF出力 ─────────────────────────────── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm 12mm;
+  }
+
+  body {
+    background: white;
+    font-size: 11px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    max-width: 100%;
+    margin: 0;
+    box-shadow: none;
+    border-top: 4px solid var(--navy);
+  }
+
+  /* タップUI → 印刷向けに最適化 */
+  .toggle-group {
+    border: 1.5px solid var(--gray-mid);
+  }
+  .toggle-btn {
+    min-width: 36px;
+    height: 28px;
+    font-size: 12px;
+  }
+  .toggle-btn:not(.active) {
+    color: #ccc;
+    background: #f5f5f5;
+  }
+  .toggle-btn.btn-yes.active { background: var(--red); color: white; }
+  .toggle-btn.btn-no.active  { background: var(--navy); color: white; }
+
+  .chip {
+    height: 26px;
+    padding: 0 8px;
+    font-size: 11px;
+    border: 1.5px solid #ccc;
+    border-radius: 13px;
+    gap: 4px;
+  }
+  .chip::before { font-size: 11px; }
+  .chip:not(.active) { color: #bbb; border-color: #e0e0e0; background: #fafafa; }
+  .chip.active { background: var(--navy); color: white; border-color: var(--navy); }
+
+  /* メモ・テキストエリア */
+  .memo-textarea {
+    min-height: 28px;
+    font-size: 11px;
+    border-bottom: 1px solid #ccc;
+  }
+  .info-input, .contact-input, .sign-field-input, .text-field {
+    font-size: 12px;
+    min-height: 28px;
+    height: 28px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* セクション */
+  .section { margin-top: 14px; }
+  .section-header { padding: 7px 12px; }
+  .section-num { width: 22px; height: 22px; font-size: 10px; }
+  .section-title { font-size: 12px; }
+  .check-table td { padding: 6px 10px; font-size: 11px; }
+  .check-table th { padding: 5px 10px; font-size: 10px; }
+  .part-label { font-size: 11px; }
+
+  /* 署名キャンバス */
+  #signCanvas { height: 80px; }
+  .canvas-wrapper { border: 1.5px solid var(--navy-mid); }
+  .sign-body { padding: 12px 16px; gap: 14px; }
+  .sign-declaration { font-size: 12px; margin-bottom: 10px; }
+
+  /* セクション・memo をページ内で分断しない */
+  .section, .memo-section, .sign-section, .contact-section { page-break-inside: avoid; }
+
+  /* 印刷時非表示 */
+  .no-print,
+  .btn-clear,
+  .canvas-actions { display: none !important; }
+
+  /* followup chip */
+  .followup-chip {
+    height: 30px;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+  .followup-chip:not(.active) { color: #bbb; border-color: #e0e0e0; background: #fafafa; }
+  .followup-chip.active { background: var(--red); color: white; }
+  .followup-chip.safe.active { background: var(--navy); }
+
+  /* memo header toggle */
+  .memo-toggle-btn { height: 26px; min-width: 36px; font-size: 11px; }
+  .memo-toggle-group { border: 1.5px solid rgba(255,255,255,.4); }
+
+  /* contact */
+  .contact-section { margin-top: 12px; gap: 10px; }
+  .contact-toggle-btn { height: 28px; min-width: 38px; font-size: 12px; }
+  .body { padding: 0 16px 16px; }
+  .info-area { padding: 12px 24px; gap: 6px 30px; }
+  .header { padding: 18px 24px 16px; }
+}
+
+/* ─── タブレット縦向き調整 ──────────────────────── */
+@media (max-width: 800px) {
+  .body { padding: 0 16px 24px; }
+  .info-area { padding: 14px 16px; gap: 8px 20px; }
+  .header { padding: 20px 20px 18px; }
+  .doc-title { font-size: 18px; }
+  .contact-section { grid-template-columns: 1fr; }
+  .sign-body { grid-template-columns: 1fr; }
+}
+</style>
+<style>
+/* ── 追加：PDF保存フローティングボタン ── */
+.pdf-fab{
+  position: fixed; right: 18px; bottom: 18px; z-index: 9000;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px; border: none; border-radius: 999px;
+  background: var(--navy); color: #fff;
+  font-size: 16px; font-weight: 700; letter-spacing: .04em;
+  box-shadow: 0 6px 18px rgba(26,46,74,.35);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.pdf-fab:active{ transform: translateY(1px); background: var(--navy-mid); }
+.pdf-fab svg{ width: 20px; height: 20px; }
+
+/* ── 追加：末尾の点検スプレッドシートリンク ── */
+.sheet-link-wrap{ text-align: center; margin: 8px 0 18px; }
+.sheet-link{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  background: var(--gold); color: #fff; text-decoration: none;
+  font-size: 15px; font-weight: 700;
+  box-shadow: 0 3px 10px rgba(184,150,62,.3);
+}
+.sheet-link:active{ background: var(--gold-light); }
+.sheet-link svg{ width: 18px; height: 18px; }
+
+@media print{
+  .pdf-fab, .sheet-link-wrap{ display: none !important; }
+}
+
+/* ── 物件名「様邸」サフィックス ── */
+.info-suffix-wrap{ display: flex; align-items: baseline; gap: 6px; flex: 1; min-width: 0; }
+.info-suffix-wrap .info-input{ flex: 1; min-width: 0; }
+.info-suffix{ font-weight: 700; color: var(--navy); white-space: nowrap; }
+.info-suffix.hidden{ display: none; }
+.suffix-toggle{
+  flex: 0 0 auto; padding: 3px 10px; border-radius: 999px;
+  border: 1.5px solid var(--navy-mid); background: #fff; color: var(--navy-mid);
+  font-size: 12px; font-weight: 700; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.suffix-toggle.active{ background: var(--navy); color: #fff; border-color: var(--navy); }
+
+/* ── 日付入力をテーマに合わせる ── */
+.info-date, .sign-date{ font-family: inherit; }
+input[type="date"]{ -webkit-appearance: none; appearance: none; min-height: 30px; }
+input[type="date"]::-webkit-date-and-time-value{ text-align: left; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     Safari 誘導オーバーレイ
+     Notion / Chatwork / LINE 等のアプリ内ブラウザで
+     開かれた際にのみ表示。印刷時は完全に非表示。
+     ══════════════════════════════════════════════════ -->
+<div id="safariGuard" role="alertdialog" aria-modal="true" aria-labelledby="sgTitle">
+  <div class="sg-card">
+
+    <div class="sg-header">
+      <span class="sg-icon">🧭</span>
+      <p class="sg-title" id="sgTitle">Safari で開き直してください</p>
+    </div>
+
+    <div class="sg-body">
+
+      <div class="sg-problem">
+        <strong>⚠️ 手書き署名・PDF出力が正常に動作しません</strong><br>
+        現在、アプリ内ブラウザ（Notion・Chatwork・LINE など）でこのチェックシートを開いています。
+        この環境では<strong>手書き署名・印刷レイアウト</strong>が正常に動作しません。
+      </div>
+
+      <div class="sg-steps">
+
+        <div class="sg-step">
+          <div class="sg-step-num">1</div>
+          <div class="sg-step-text">
+            以下のアプリから開いている場合、画面の
+            <strong>右上・右下のメニュー（「…」または共有アイコン）</strong>
+            をタップしてください。
+            <div class="sg-app-icons">
+              <span class="sg-app-tag">💬 Chatwork</span>
+              <span class="sg-app-tag">📓 Notion</span>
+              <span class="sg-app-tag">💚 LINE</span>
+              <span class="sg-app-tag">📘 Facebook</span>
+              <span class="sg-app-tag">📷 Instagram</span>
+              <span class="sg-app-tag">💼 Slack</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sg-step">
+          <div class="sg-step-num">2</div>
+          <div class="sg-step-text">
+            メニューの中から<br>
+            「<strong>🧭 Safari で開く</strong>」または
+            「<strong>ブラウザで開く</strong>」を選んでください
+          </div>
+        </div>
+
+        <div class="sg-step">
+          <div class="sg-step-num">3</div>
+          <div class="sg-step-text">
+            Safari で開いた後は、チェック入力・手書き署名・PDF保存がすべて正常に動作します
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="sg-divider">
+
+      <button class="sg-dismiss" onclick="dismissGuard()">
+        すでに Safari で開いている（誤検知） → このまま続ける
+      </button>
+      <p class="sg-note">※ このメッセージは PDF 保存（印刷）時には自動的に非表示になります</p>
+
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ══ ヘッダー ══════════════════════════════════════ -->
+<div class="header">
+  <div class="header-left">
+    <div class="company-name">TANAKA HOME Co., Ltd.</div>
+    <div class="doc-title">住まいの定期点検サービス<br>チェックシート</div>
+    <div class="doc-subtitle">定期点検 ／ PERIODIC INSPECTION REPORT</div>
+  </div>
+  <div class="year-badge">1年<span>点検</span></div>
+</div>
+
+<!-- ══ 基本情報 ════════════════════════════════════════ -->
+<div class="info-area">
+  <div class="info-row span2">
+    <span class="info-label">物件名</span>
+    <div class="info-suffix-wrap">
+      <input class="info-input" type="text" autocomplete="off" placeholder="お名前を入力">
+      <span class="info-suffix" id="nameSuffix">様邸</span>
+      <button type="button" class="suffix-toggle no-print" id="suffixToggle" onclick="toggleSuffix()">法人</button>
+    </div>
+  </div>
+  <div class="info-row span2">
+    <span class="info-label">現場住所</span>
+    <input class="info-input" type="text" autocomplete="off" placeholder="〒　　　　　　　　　　　　　　　　　　　　　">
+  </div>
+  <div class="info-row">
+    <span class="info-label">点検日</span>
+    <input class="info-input info-date" type="date" autocomplete="off">
+  </div>
+  <div class="info-row">
+    <span class="info-label">引渡し日</span>
+    <input class="info-input info-date" type="date" autocomplete="off">
+  </div>
+  <div class="info-row">
+    <span class="info-label">点検者</span>
+    <input class="info-input" type="text" autocomplete="off" placeholder="氏名">
+  </div>
+  <div class="info-row">
+    <span class="info-label">同席者</span>
+    <input class="info-input" type="text" autocomplete="off" placeholder="氏名（お客様・他）">
+  </div>
+</div>
+
+<!-- ══ メインボディ ════════════════════════════════════ -->
+<div class="body">
+
+  <!-- ① 外部（基礎・外構） -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">外部（基礎・外構）</div>
+      <div class="section-icon">🏗️</div>
+    </div>
+    <div class="section-body">
+      <table class="check-table">
+        <colgroup><col style="width:52%"><col style="width:22%"><col style="width:26%"></colgroup>
+        <thead>
+          <tr>
+            <th>チェック項目</th>
+            <th class="center">状況</th>
+            <th>備考・詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>土間コンクリート面に著しいひびがある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td>基礎に著しいひび割れが見られる</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td>基礎仕上げ材の著しい割れ、剥がれ、浮きがある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td>玄関・ポーチ・車庫等の床面タイルの剥がれ、割れがある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td>雨樋の割れ、外れ、変形等がある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td>外水栓の凍結、破損、不具合がある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td>バルコニーに著しいひび割れがある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td>バルコニー天井から漏水がある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ② 外壁 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">外壁</div>
+      <div class="section-icon">🧱</div>
+    </div>
+    <div class="section-body">
+      <table class="check-table">
+        <colgroup><col style="width:52%"><col style="width:22%"><col style="width:26%"></colgroup>
+        <thead>
+          <tr>
+            <th>チェック項目</th>
+            <th class="center">状況</th>
+            <th>備考・詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>著しいひび割れがある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder="箇所・程度"></textarea></td>
+          </tr>
+          <tr>
+            <td>仕上げ材料の剥がれ、浮き、塗装の剥がれ等がある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder="箇所・程度"></textarea></td>
+          </tr>
+          <tr>
+            <td>外壁の目地が傷んでいる</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder="箇所・程度"></textarea></td>
+          </tr>
+          <tr>
+            <td>シーリングの割れ、隙間がある</td>
+            <td class="status"><div class="toggle-group"><button type="button" class="toggle-btn btn-yes" onclick="toggleRadio(this)">有</button><button type="button" class="toggle-btn btn-no" onclick="toggleRadio(this)">無</button></div></td>
+            <td class="remarks"><textarea class="text-field" rows="1" placeholder="箇所・程度"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ③ 建具・開口部 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">建具・開口部</div>
+      <div class="section-icon">🚪</div>
+    </div>
+    <div class="section-body">
+      <table class="check-table">
+        <colgroup><col style="width:18%"><col style="width:55%"><col style="width:27%"></colgroup>
+        <thead><tr><th>部位</th><th>不具合項目（該当するものにタップ）</th><th>備考・詳細</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="part-label">玄関ドア</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">部品欠損</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">開閉障害</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">建て付け不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">施錠不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">解錠不良</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">サッシ</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">部品欠損</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">開閉障害</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">建て付け不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">施錠不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">解錠不良</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">網戸</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">部品欠損</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">開閉障害</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">ゆるみ・たるみ</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">室内建具</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">部品欠損</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">開閉障害</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">建て付け不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">施錠不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">解錠不良</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder=""></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ④ 内部仕上げ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">内部仕上げ</div>
+      <div class="section-icon">🏠</div>
+    </div>
+    <div class="section-body">
+      <table class="check-table">
+        <colgroup><col style="width:18%"><col style="width:55%"><col style="width:27%"></colgroup>
+        <thead><tr><th>部位</th><th>不具合項目（該当するものにタップ）</th><th>備考・詳細</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="part-label">床</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">床鳴り</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">剥がれ・浮き</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">隙間・反り</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">傷・変色</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="場所・程度"></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">クロス・壁</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">著しいひび割れ</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">剥がれ・浮き</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">目地の隙間</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">汚れ・変色</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="場所・程度"></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">天井</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">著しいひび割れ</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">剥がれ・浮き</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">雨染み・汚れ</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="場所・程度"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ⑤ 電気・設備 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">電気・設備</div>
+      <div class="section-icon">⚡</div>
+    </div>
+    <div class="section-body">
+      <table class="check-table">
+        <colgroup><col style="width:18%"><col style="width:55%"><col style="width:27%"></colgroup>
+        <thead><tr><th>部位</th><th>不具合項目（該当するものにタップ）</th><th>備考・詳細</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="part-label">電気・照明</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">コンセント不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">スイッチ不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">照明破損</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">がたつき</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="場所"></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">冷暖房</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">エアコン不具合</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">暖房機不具合</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="場所・症状"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ⑥ 水回り -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">水回り</div>
+      <div class="section-icon">🚿</div>
+    </div>
+    <div class="section-body">
+      <table class="check-table">
+        <colgroup><col style="width:18%"><col style="width:55%"><col style="width:27%"></colgroup>
+        <thead><tr><th>部位</th><th>不具合項目（該当するものにタップ）</th><th>備考・詳細</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="part-label">キッチン</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">水漏れ</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">換気扇・レンジフード不具合</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">食洗機不具合</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">IHコンロ不具合</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="症状"></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">洗面・洗濯</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">洗面台水漏れ</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">蛇口・排水不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">洗濯パン不具合</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="症状"></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">トイレ</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">水漏れ</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">水詰まり</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">ウォシュレット不具合</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="症状"></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">浴室</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">水栓・シャワー不具合</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">排水不良</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">換気扇不具合</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">コーキング劣化</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="症状"></textarea></td>
+          </tr>
+          <tr>
+            <td class="part-label">基礎内</td>
+            <td><div class="chip-group">
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">浸水の跡</button>
+              <button type="button" class="chip" onclick="this.classList.toggle('active')">水漏れ（点検口から）</button>
+            </div></td>
+            <td><textarea class="text-field" rows="1" placeholder="状況"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ⑦ その他・お客様からのご要望 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">その他・お客様からのご要望</div>
+      <div class="section-icon">💬</div>
+    </div>
+    <div class="section-body">
+      <table class="check-table">
+        <tbody>
+          <tr><td style="padding:10px 12px">
+            <textarea class="text-field" rows="2" placeholder="気になる点やご要望をご記入ください"></textarea>
+          </td></tr>
+          <tr><td style="padding:6px 12px 12px">
+            <textarea class="text-field" rows="2" placeholder="（続き）"></textarea>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 訪問当日 作業事項 -->
+  <div class="memo-section">
+    <div class="memo-header">
+      <div class="memo-title">訪問当日 作業事項</div>
+      <div class="memo-toggle-group">
+        <button type="button" class="memo-toggle-btn" onclick="toggleMemoRadio(this)">有</button>
+        <button type="button" class="memo-toggle-btn" onclick="toggleMemoRadio(this)">無</button>
+      </div>
+    </div>
+    <div class="memo-body">
+      <div class="memo-note">※ 是正が完了した項目のみ記載してください</div>
+      <textarea class="memo-textarea" rows="1" placeholder="1."></textarea>
+      <textarea class="memo-textarea" rows="1" placeholder="2."></textarea>
+      <textarea class="memo-textarea" rows="1" placeholder="3."></textarea>
+      <textarea class="memo-textarea" rows="1" placeholder="4."></textarea>
+    </div>
+  </div>
+
+  <!-- 特記事項 -->
+  <div class="memo-section" style="margin-top:12px">
+    <div class="memo-header">
+      <div class="memo-title">特記事項（オーナー様のご意見・使い勝手など）</div>
+      <div class="memo-toggle-group">
+        <button type="button" class="memo-toggle-btn" onclick="toggleMemoRadio(this)">有</button>
+        <button type="button" class="memo-toggle-btn" onclick="toggleMemoRadio(this)">無</button>
+      </div>
+    </div>
+    <div class="memo-body">
+      <textarea class="memo-textarea" rows="1" placeholder=""></textarea>
+      <textarea class="memo-textarea" rows="1" placeholder=""></textarea>
+      <textarea class="memo-textarea" rows="1" placeholder=""></textarea>
+      <textarea class="memo-textarea" rows="1" placeholder=""></textarea>
+    </div>
+  </div>
+
+  <!-- 連絡先 -->
+  <div class="contact-section">
+    <div class="contact-box">
+      <div class="contact-box-header">今後のご連絡可能な曜日・時間帯（1）</div>
+      <div class="contact-box-body">
+        <div class="contact-row">
+          <div class="contact-type-group">
+            <button type="button" class="contact-toggle-btn" onclick="toggleContactType(this)">固定</button>
+            <button type="button" class="contact-toggle-btn" onclick="toggleContactType(this)">携帯</button>
+          </div>
+          <input class="contact-input" type="tel" autocomplete="off" placeholder="（　　　-　　　-　　　　）">
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">曜日・時間帯：</span>
+          <input class="contact-input" type="text" autocomplete="off" placeholder="例）平日 10:00〜17:00">
+        </div>
+      </div>
+    </div>
+    <div class="contact-box">
+      <div class="contact-box-header">今後のご連絡可能な曜日・時間帯（2）</div>
+      <div class="contact-box-body">
+        <div class="contact-row">
+          <div class="contact-type-group">
+            <button type="button" class="contact-toggle-btn" onclick="toggleContactType(this)">固定</button>
+            <button type="button" class="contact-toggle-btn" onclick="toggleContactType(this)">携帯</button>
+          </div>
+          <input class="contact-input" type="tel" autocomplete="off" placeholder="（　　　-　　　-　　　　）">
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">曜日・時間帯：</span>
+          <input class="contact-input" type="text" autocomplete="off" placeholder="例）土日 終日">
+        </div>
+      </div>
+    </div>
+
+    <!-- 後日対応 -->
+    <div class="followup-box">
+      <div class="followup-header">⚠️ 後日対応（いずれかにタップしてください）</div>
+      <div class="followup-body">
+        <button type="button" class="followup-chip" onclick="this.classList.toggle('active')">後日の連絡又は対応が必要です</button>
+        <button type="button" class="followup-chip safe" onclick="this.classList.toggle('active')">対応不要</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 署名エリア ══ -->
+  <div class="sign-section">
+    <div class="sign-section-header">
+      <div class="sign-section-title">✍️ 立会い確認・署名</div>
+    </div>
+    <div class="sign-body">
+      <!-- 左：テキスト + 日付 + 点検者 -->
+      <div>
+        <div class="sign-declaration">
+          本日、定期点検サービスの<br>立会いを行いました。
+        </div>
+        <div class="sign-fields">
+          <div class="sign-field-row">
+            <span class="sign-field-label">西暦</span>
+            <input class="sign-field-input sign-date" type="date" autocomplete="off">
+          </div>
+          <div class="sign-field-row">
+            <span class="sign-field-label">点検者</span>
+            <input class="sign-field-input" type="text" autocomplete="off" placeholder="（氏名を入力）">
+          </div>
+        </div>
+      </div>
+      <!-- 右：お客様手書き署名 -->
+      <div class="canvas-box">
+        <div class="canvas-label">お客様ご署名（指またはApple Pencilでご署名ください）</div>
+        <div class="canvas-wrapper">
+          <canvas id="signCanvas"></canvas>
+          <div class="canvas-placeholder" id="signPlaceholder">ここにご署名ください</div>
+        </div>
+        <div class="canvas-actions no-print">
+          <button type="button" class="btn-clear" onclick="clearSignature()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/>
+            </svg>
+            書き直す
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /body -->
+
+<div class="sheet-link-wrap">
+  <a class="sheet-link" href="#" onclick="openSheet(event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/>
+    </svg>
+    点検スプレッドシートを開く
+  </a>
+</div>
+
+<div class="footer">
+  タナカホーム株式会社　｜　住まいの定期点検サービス　1年目チェックシート　｜　本書は立会い記録として保管してください
+</div>
+
+</div><!-- /page -->
+
+<!-- ══ JavaScript ══════════════════════════════════════ -->
+<script>
+/* ▼▼ ここに点検スプレッドシートのURLを貼るだけ ▼▼ */
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/12oyhkEvrdfjwVqkV3X_mkfVvlPqPT9467mNRzTt_i8Y/edit?gid=1642696376#gid=1642696376";
+/* ▲▲ ここまで ▲▲ */
+
+function toggleSuffix(){
+  const suffix = document.getElementById('nameSuffix');
+  const btn = document.getElementById('suffixToggle');
+  const isCorp = suffix.classList.toggle('hidden');
+  btn.classList.toggle('active', isCorp);
+  btn.textContent = isCorp ? '個人' : '法人';
+}
+
+function openSheet(e){
+  e.preventDefault();
+  if (!SHEET_URL || SHEET_URL === "PASTE_SPREADSHEET_URL_HERE"){
+    alert("点検スプレッドシートのURLが未設定です。\nHTML内の SHEET_URL に貼り付けてください。");
+    return;
+  }
+  window.open(SHEET_URL, "_blank");
+}
+/* ── 有/無 トグル ── */
+function toggleRadio(btn) {
+  const group = btn.closest('.toggle-group');
+  group.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── memo内 有/無 トグル ── */
+function toggleMemoRadio(btn) {
+  const group = btn.closest('.memo-toggle-group');
+  group.querySelectorAll('.memo-toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── 連絡先 固定/携帯 トグル ── */
+function toggleContactType(btn) {
+  const group = btn.closest('.contact-type-group');
+  group.querySelectorAll('.contact-toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── テキストエリア 自動リサイズ ── */
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
+document.querySelectorAll('textarea').forEach(ta => {
+  ta.addEventListener('input', () => autoResize(ta));
+  ta.addEventListener('focus', () => autoResize(ta));
+});
+
+/* ── 手書き署名 Canvas ── */
+(function initSignature() {
+  const canvas  = document.getElementById('signCanvas');
+  const placeholder = document.getElementById('signPlaceholder');
+  if (!canvas) return;
+
+  /* HiDPI 対応 */
+  function setupCanvas() {
+    const dpr  = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = Math.floor(rect.width  * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.strokeStyle = '#1a2e4a';
+    ctx.lineWidth   = 2.2;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+  }
+  setupCanvas();
+
+  /* キャンバス座標変換（CSS px → 描画 px） */
+  function getXY(e) {
+    const rect = canvas.getBoundingClientRect();
+    const src  = e.touches ? e.touches[0] : e;
+    return {
+      x: src.clientX - rect.left,
+      y: src.clientY - rect.top
+    };
+  }
+
+  let drawing = false;
+  let lastX = 0, lastY = 0;
+  let hasDraw = false;
+
+  function startDraw(e) {
+    e.preventDefault();
+    drawing = true;
+    const p = getXY(e);
+    lastX = p.x; lastY = p.y;
+    if (!hasDraw) {
+      hasDraw = true;
+      placeholder.style.display = 'none';
+    }
+    /* 点を打つ（短いタップ対応） */
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.arc(lastX, lastY, ctx.lineWidth / 2, 0, Math.PI * 2);
+    ctx.fillStyle = ctx.strokeStyle;
+    ctx.fill();
+  }
+
+  function moveDraw(e) {
+    e.preventDefault();
+    if (!drawing) return;
+    const p   = getXY(e);
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    lastX = p.x; lastY = p.y;
+  }
+
+  function endDraw(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    drawing = false;
+  }
+
+  /* タッチイベント（passive: false でスクロール抑止） */
+  canvas.addEventListener('touchstart', startDraw, { passive: false });
+  canvas.addEventListener('touchmove',  moveDraw,  { passive: false });
+  canvas.addEventListener('touchend',   endDraw,   { passive: false });
+  canvas.addEventListener('touchcancel',endDraw,   { passive: false });
+
+  /* マウスイベント（デスクトップ確認用） */
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mousemove', moveDraw);
+  canvas.addEventListener('mouseup',   endDraw);
+  canvas.addEventListener('mouseleave',endDraw);
+
+  /* ウィンドウリサイズ対応 */
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      /* 既存の描画を保持して再スケール */
+      const tmpCanvas = document.createElement('canvas');
+      tmpCanvas.width  = canvas.width;
+      tmpCanvas.height = canvas.height;
+      tmpCanvas.getContext('2d').drawImage(canvas, 0, 0);
+      setupCanvas();
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      ctx.drawImage(tmpCanvas, 0, 0,
+        tmpCanvas.width, tmpCanvas.height,
+        0, 0,
+        canvas.width / dpr, canvas.height / dpr
+      );
+    }, 300);
+  });
+
+  /* グローバル関数として公開 */
+  window._signatureHasDraw  = () => hasDraw;
+  window._signaturePlaceholder = placeholder;
+})();
+
+function clearSignature() {
+  const canvas = document.getElementById('signCanvas');
+  const ctx    = canvas.getContext('2d');
+  const dpr    = window.devicePixelRatio || 1;
+  ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+  /* プレースホルダー再表示 */
+  document.getElementById('signPlaceholder').style.display = '';
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   ブラウザ環境検知 → Safari 誘導オーバーレイ制御
+   ▸ 本物のiOS Safari : UA に "Safari/" を含み Chrome系なし
+   ▸ WKWebView(アプリ内) : iOS だが "Safari/" が無い
+   ▸ 特定アプリ : UA に固有文字列を含む
+   ══════════════════════════════════════════════════════════ */
+(function detectAndWarn() {
+  var ua = navigator.userAgent || '';
+
+  /* ① 特定アプリの UA パターン */
+  var appPatterns = [
+    /Line\//i,               // LINE
+    /ChatWork/i,              // Chatwork
+    /Notion/i,               // Notion
+    /FBAV|FBAN|FB_IAB|FBIOS/i,// Facebook
+    /Instagram/i,            // Instagram
+    /Twitter(?:lite|\s|_)/i, // Twitter / X
+    /Slack(?:\/|\s)/i,       // Slack
+    /Cybozu/i,               // Cybozu (Garoon等)
+    /MicroMessenger/i,       // WeChat
+    /YJApp/i,                // Yahoo! JAPANアプリ
+  ];
+
+  var isKnownApp = appPatterns.some(function(re){ return re.test(ua); });
+
+  /* ② iOS WebView の汎用検知
+     iOS 本物のSafari は必ず "Safari/" を含む
+     WKWebView では "Mobile/" はあるが "Safari/" が付かない          */
+  var isIOS       = /iPhone|iPad|iPod/.test(ua);
+  var hasSafariID = /Safari\//.test(ua);
+  var hasChromeID = /CriOS|Chrome/.test(ua);   // Chrome for iOS は除外
+  var isSafariReal= isIOS && hasSafariID && !hasChromeID;
+  var isIOSWebView= isIOS && !hasSafariID;     // Safari表記なし＝WebView
+
+  /* ③ Android WebView 汎用検知（参考）*/
+  var isAndroidWV = /Android/.test(ua) && /wv\)/.test(ua);
+
+  /* ④ 判定 ─ 以下のいずれかなら警告を表示 */
+  var needsWarning = isKnownApp || isIOSWebView || isAndroidWV;
+
+  /* Safari, Chrome, Firefox 等の通常ブラウザは表示しない */
+  if (needsWarning) {
+    var el = document.getElementById('safariGuard');
+    if (el) el.classList.add('visible');
+  }
+})();
+
+/* オーバーレイを閉じる（「誤検知」ボタン用） */
+function dismissGuard() {
+  var el = document.getElementById('safariGuard');
+  if (el) {
+    el.classList.remove('visible');
+    /* body のスクロールを復元 */
+    document.body.style.overflow = '';
+  }
+}
+
+/* オーバーレイ表示中はbodyスクロールをロック */
+(function() {
+  var mo = new MutationObserver(function() {
+    var el = document.getElementById('safariGuard');
+    if (!el) return;
+    document.body.style.overflow = el.classList.contains('visible') ? 'hidden' : '';
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var el = document.getElementById('safariGuard');
+    if (el) mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+  });
+})();
+</script><button type="button" class="pdf-fab" onclick="window.print()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>
+  </svg>
+  PDFを保存
+</button>
+</body>
+</html>
